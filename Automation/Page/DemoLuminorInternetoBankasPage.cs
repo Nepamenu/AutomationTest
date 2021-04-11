@@ -1,23 +1,24 @@
 ﻿/* 2021-04-12 Jurate B. Automated Testing Final Project
- * Testing Luminor login to account with null ID number */
+ * Testing Luminor login to account with null value ID number */
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Automation.Page
 {
     public class DemoLuminorInternetoBankasPage : BasePage
     {
-        private const string PageAddress = "https://www.luminor.lt/";
+        private const string PageAddress = "https://ib.dnb.lt/";
 
-        IWebElement _internetoBankasButton => Driver.FindElement(By.CssSelector("#menu > div.menu__mobile-wrapper > ul.menu__list.menu__list--right.clearfix > li:nth-child(1) > a"));
         IWebElement _prisijungimoKodas => Driver.FindElement(By.Id("text"));
-        IWebElement _loginbutton => Driver.FindElement(By.Id("loginMsg"));
-        IWebElement _errorMessage => Driver.FindElement(By.CssSelector(".infobox error"));
+        IWebElement _loginbutton => Driver.FindElement(By.Id("logout"));
+        //IWebElement _errorMessage => Driver.FindElement(By.CssSelector(".infobox error"));
+        IWebElement _errorMessage => Driver.FindElement(By.CssSelector("#wrap > div > div.infobox.error > label"));
 
 
         public DemoLuminorInternetoBankasPage(IWebDriver webdriver) : base(webdriver) { }
@@ -30,11 +31,7 @@ namespace Automation.Page
             return this;
         }
 
-        public DemoLuminorInternetoBankasPage ClickInternetoBankasButton()
-        {
-            _internetoBankasButton.Click();
-            return this;
-        }
+       
         public DemoLuminorInternetoBankasPage ClearInputField()
         {
             _prisijungimoKodas.Clear();
@@ -43,6 +40,7 @@ namespace Automation.Page
 
         public DemoLuminorInternetoBankasPage ClickLoginButton()
         {
+            Thread.Sleep(10000);
             _loginbutton.Click();
             return this;
         }
